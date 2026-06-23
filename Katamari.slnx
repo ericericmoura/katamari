@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="Katamari.vcxproj" />
+  <Project Path="Katamari.vcxproj" Id="ced2551b-5ed5-4f3a-9459-55a05e7322ea" />
 </Solution>

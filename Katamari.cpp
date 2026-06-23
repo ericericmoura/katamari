@@ -8,6 +8,7 @@
 
 #include "Entity.h"
 #include "BitmapStore.h"
+#include <SFML/System/Clock.hpp>
 
 struct WindowConfiguration
 {
@@ -17,13 +18,15 @@ struct WindowConfiguration
 
 int main()
 {
-	BitmapStore store;
+	BitmapStore store{};
+
 	Entity player{ store.GetTexture("./graphics/scales.jpg") };
 	player.setPosition({ 100.f, 100.f });
 
 	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
 	sf::RenderWindow window(mode, WindowConfiguration::title_, WindowConfiguration::state_);
 	
+	sf::Clock frame_clock{};
 	while (window.isOpen())
 	{		
 		while (auto event = window.pollEvent())
@@ -33,6 +36,12 @@ int main()
 				window.close();
 			}
 		}
+
+		float delta = frame_clock.restart().asSeconds();
+
+		player.Update();
+		player.PhysicsUpdate(delta);
+
 		window.clear(sf::Color::Blue);
 		window.draw(player);
 		window.display();
