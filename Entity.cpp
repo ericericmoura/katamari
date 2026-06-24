@@ -11,6 +11,7 @@
 #include "PlayerUpdateComponent.h"
 #include "EntityTransform.h"
 #include "GraphicsComponent.h"
+#include "EntityManager.h"
 
 Entity::Entity()
 {	
@@ -35,10 +36,13 @@ Entity::Entity(const sf::Texture* texture, std::unique_ptr<GraphicsComponent> gr
 		});
 }
 
-void Entity::Update()
+void Entity::Update(EntityManager& entity_manager)
 {
-	update_component_->Update();
+	update_component_->Update(entity_manager);
 }
+
+void Entity::Update(EntityManager& store)
+{}
 
 void Entity::PhysicsUpdate(float delta)
 {

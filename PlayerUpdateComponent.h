@@ -4,6 +4,7 @@
 #include <SFML/Window/Keyboard.hpp>
 
 #include "UpdateComponent.h"
+#include "EntityManager.h"
 
 class PlayerUpdateComponent : public UpdateComponent
 {
@@ -16,7 +17,7 @@ public:
 		sf::Keyboard::Scancode down_key
 	);	
 
-	void Update() override;
+	void Update(EntityManager& entity_manager) override;
 	void PhysicsUpdate(float delta) override;
 
 	void SetInputMap(

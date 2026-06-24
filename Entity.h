@@ -10,6 +10,7 @@
 
 #include "GraphicsComponent.h"
 #include "UpdateComponent.h"
+#include "EntityManager.h"
 
 class Entity : public sf::Transformable, public sf::Drawable
 {
@@ -17,7 +18,7 @@ public:
 	Entity();
 	Entity(const sf::Texture* texture, std::unique_ptr<GraphicsComponent> graphics);
 
-	void Update();
+	void Update(EntityManager& entity_manager);
 	void PhysicsUpdate(float delta);
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

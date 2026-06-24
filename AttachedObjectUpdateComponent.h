@@ -3,14 +3,16 @@
 #include "UpdateComponent.h"
 #include "EntityTransform.h"
 
+#include "EntityManager.h"
+
 class AttachedObjectUpdateComponent : public UpdateComponent
 {
 public:
-	AttachedObjectUpdateComponent(EntityTransform target_transform);
+	AttachedObjectUpdateComponent() = default;
 	
-	void Update() override;
+	void Update(EntityManager& entity_manager) override;
 
 private:
-	EntityTransform& target_transform_;
+	EntityTransform target_transform_;
 };
 

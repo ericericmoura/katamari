@@ -3,6 +3,8 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/System/Vector2.hpp>
 
+#include "EntityManager.h"
+
 PlayerUpdateComponent::PlayerUpdateComponent(
 	float speed, 
 	sf::Keyboard::Scancode left_key, sf::Keyboard::Scancode right_key, 
@@ -15,7 +17,7 @@ PlayerUpdateComponent::PlayerUpdateComponent(
 	, down_key_ (down_key)
 {}
 
-void PlayerUpdateComponent::Update()
+void PlayerUpdateComponent::Update(EntityManager& entity_manager)
 {	
 	direction_ = GetInputDirection();
 }

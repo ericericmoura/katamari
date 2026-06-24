@@ -6,6 +6,9 @@
 #include <SFML/Graphics/Shape.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
+#include <SFML/Graphics/Texture.hpp>
+
+#include "GraphicsComponent.h"
 
 template <typename T>
 concept Drawable = std::derived_from<T, sf::Shape>;
