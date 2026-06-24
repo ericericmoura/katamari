@@ -154,6 +154,7 @@
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="EntityStore.cpp" />
     <ClCompile Include="EntityTransform.h" />
+    <ClCompile Include="GraphicsComponent.cpp" />
     <ClCompile Include="Katamari.cpp" />
     <ClCompile Include="PlayerUpdateComponent.cpp" />
     <ClCompile Include="UpdateComponent.cpp" />
@@ -162,8 +163,9 @@
     <ClInclude Include="AttachedObjectUpdateComponent.h" />
     <ClInclude Include="BitmapStore.h" />
     <ClInclude Include="EntityStore.h" />
+    <ClInclude Include="GraphicsComponent.h" />
     <ClInclude Include="PlayerUpdateComponent.h" />
-    <ClInclude Include="StandardGraphicsComponent.h" />
+    <ClInclude Include="ShapeGraphicsComponent.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="UpdateComponent.h" />
   </ItemGroup>

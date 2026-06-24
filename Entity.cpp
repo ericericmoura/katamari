@@ -1,6 +1,7 @@
 #include "Entity.h"
 
 #include <memory>
+#include <utility>
 
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
@@ -9,9 +10,9 @@
 
 #include "PlayerUpdateComponent.h"
 #include "EntityTransform.h"
+#include "GraphicsComponent.h"
 
-Entity::Entity() 
-	: graphics_(64.f, 32.f)
+Entity::Entity()
 {	
 	update_component_ = std::make_unique<PlayerUpdateComponent>(
 		250.0f, 
@@ -21,11 +22,13 @@ Entity::Entity()
 		sf::Keyboard::Scancode::S);
 }
 
-Entity::Entity(const sf::Texture* texture)
+Entity::Entity(const sf::Texture* texture, std::unique_ptr<GraphicsComponent> graphics)
 	: Entity()
 {
-	graphics_.GetGraphics().setTexture(texture);
-	graphics_.GetGraphics().setOrigin(
+	graphics_ = std::move(graphics);
+
+	graphics_->SetTexture(texture);
+	graphics_->setOrigin(
 		{
 			64.f,
 			64.f
@@ -42,13 +45,13 @@ void Entity::PhysicsUpdate(float delta)
 	update_component_->PhysicsUpdate(delta);
 
 	EntityTransform transform = update_component_->GetTransform();
-	graphics_.GetGraphics().setPosition(transform.Position);
-	graphics_.GetGraphics().setRotation(transform.Rotation);
-	graphics_.GetGraphics().setScale   (transform.Scale);
+	graphics_->setPosition(transform.Position);
+	graphics_->setRotation(transform.Rotation);
+	graphics_->setScale   (transform.Scale);
 }
 
 void Entity::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	states.transform = getTransform();
-	target.draw(graphics_, states);
+	target.draw(*graphics_, states);
 }

@@ -3,21 +3,21 @@
 #include <utility>
 #include <concepts>
 
-#include <SFML/Graphics/Drawable.hpp>
+#include <SFML/Graphics/Shape.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 
 template <typename T>
-concept Drawable = std::derived_from<T, sf::Drawable>;
+concept Drawable = std::derived_from<T, sf::Shape>;
 
 template <Drawable T>
-class StandardGraphicsComponent : public sf::Drawable
+class ShapeGraphicsComponent : public GraphicsComponent
 {
 public:
-	StandardGraphicsComponent() = default;	
+	ShapeGraphicsComponent() = default;	
 
 	template <typename ... Args>
-	StandardGraphicsComponent(Args&& ... args) 
+	ShapeGraphicsComponent(Args&& ... args) 
 		: graphics_(std::forward<Args>(args)...)
 	{
 	}
@@ -27,8 +27,15 @@ public:
 		return graphics_;
 	}
 
+	virtual void SetTexture(const sf::Texture* texture) override
+	{
+		graphics_.setTexture(texture);
+	}
+
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override
 	{		
+		states.transform *= getTransform();
+
 		target.draw(graphics_, states);
 	};
 

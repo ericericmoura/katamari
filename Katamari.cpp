@@ -1,14 +1,19 @@
 #include <string>
+#include <utility>
+#include <memory>
 
 #include <SFML/Window/VideoMode.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/WindowEnums.hpp>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/System/Clock.hpp>
 
 #include "Entity.h"
 #include "BitmapStore.h"
-#include <SFML/System/Clock.hpp>
+#include "EntityStore.h"
+#include "ShapeGraphicsComponent.h"
 
 struct WindowConfiguration
 {
@@ -18,12 +23,18 @@ struct WindowConfiguration
 
 int main()
 {
-	BitmapStore store{};
+	BitmapStore bitmap_store{};
+	EntityStore entity_store{};
 
-	Entity player{ store.GetTexture("./graphics/scales.jpg") };
+	Entity player{ 
+		bitmap_store.GetTexture("./graphics/scales.jpg"), 
+		std::make_unique<ShapeGraphicsComponent<sf::CircleShape>>(64.f, 32.f)
+	};
 	player.setPosition({ 100.f, 100.f });
 
-	sf::VideoMode mode = sf::VideoMode::getDesktopMode();
+	entity_store.AddEntity(std::move(player));
+
+	auto mode = sf::VideoMode::getDesktopMode();
 	sf::RenderWindow window(mode, WindowConfiguration::title_, WindowConfiguration::state_);
 	
 	sf::Clock frame_clock{};
@@ -37,13 +48,13 @@ int main()
 			}
 		}
 
-		float delta = frame_clock.restart().asSeconds();
+		auto delta = frame_clock.restart().asSeconds();
 
-		player.Update();
-		player.PhysicsUpdate(delta);
+		entity_store.Update();
+		entity_store.PhysicsUpdate(delta);
 
 		window.clear(sf::Color::Blue);
-		window.draw(player);
+		window.draw(entity_store);
 		window.display();
 	}
 }
