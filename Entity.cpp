@@ -41,9 +41,6 @@ void Entity::Update(EntityManager& entity_manager)
 	update_component_->Update(entity_manager);
 }
 
-void Entity::Update(EntityManager& store)
-{}
-
 void Entity::PhysicsUpdate(float delta)
 {
 	update_component_->PhysicsUpdate(delta);

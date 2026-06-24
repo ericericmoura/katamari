@@ -3,9 +3,11 @@
 #include <string>
 #include <vector>
 #include <unordered_map>
+#include <cstdint>
 
-#include "EntityStore.h"
-#include "Entity.h"
+using Id = uint32_t;
+
+class Entity;
 
 class EntityManager
 {

@@ -8,13 +8,14 @@
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Clock.hpp>
+#include <SFML/System/Vector2.hpp>
 
 #include "Entity.h"
 #include "BitmapStore.h"
 #include "EntityStore.h"
 #include "ShapeGraphicsComponent.h"
-#include "EntityManager.h"
 
 struct WindowConfiguration
 {
@@ -24,8 +25,8 @@ struct WindowConfiguration
 
 int main()
 {
-	BitmapStore   bitmap_store{};
-	EntityManager entity_manager{};
+	BitmapStore bitmap_store{};
+	EntityStore entity_store{};
 
 	Entity player{ 
 		bitmap_store.GetTexture("./graphics/scales.jpg"), 
@@ -33,7 +34,14 @@ int main()
 	};
 	player.setPosition({ 100.f, 100.f });
 
+	Entity object{
+		bitmap_store.GetTexture("./graphics/scales.jpg"),
+		std::make_unique<ShapeGraphicsComponent<sf::RectangleShape>>(sf::Vector2f({150.f, 150.f}))
+	};
+	object.setPosition({ 200.f, 200.f });
+
 	entity_store.AddEntity(std::move(player));
+	entity_store.AddEntity(std::move(object));
 
 	auto mode = sf::VideoMode::getDesktopMode();
 	sf::RenderWindow window(mode, WindowConfiguration::title_, WindowConfiguration::state_);
