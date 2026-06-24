@@ -11,7 +11,7 @@
 #include "EntityTransform.h"
 
 Entity::Entity() 
-	: graphics_(64, 32)
+	: graphics_(64.f, 32.f)
 {	
 	update_component_ = std::make_unique<PlayerUpdateComponent>(
 		250.0f, 
@@ -27,8 +27,8 @@ Entity::Entity(const sf::Texture* texture)
 	graphics_.GetGraphics().setTexture(texture);
 	graphics_.GetGraphics().setOrigin(
 		{
-			graphics_.GetGraphics().getRadius(),
-			graphics_.GetGraphics().getRadius()
+			64.f,
+			64.f
 		});
 }
 

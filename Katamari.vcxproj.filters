@@ -36,6 +36,9 @@
     <ClCompile Include="EntityTransform.h">
       <Filter>Header Files</Filter>
     </ClCompile>
+    <ClCompile Include="EntityStore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UpdateComponent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityStore.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

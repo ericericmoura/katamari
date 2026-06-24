@@ -14,10 +14,10 @@ template <Drawable T>
 class StandardGraphicsComponent : public sf::Drawable
 {
 public:
-	StandardGraphicsComponent() = default;
+	StandardGraphicsComponent() = default;	
 
 	template <typename ... Args>
-	StandardGraphicsComponent(Args&& ... args)
+	StandardGraphicsComponent(Args&& ... args) 
 		: graphics_(std::forward<Args>(args)...)
 	{
 	}
@@ -35,4 +35,3 @@ public:
 private:
 	T graphics_;
 };
-

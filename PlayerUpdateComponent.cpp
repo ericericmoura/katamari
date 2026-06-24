@@ -43,8 +43,8 @@ sf::Vector2f PlayerUpdateComponent::GetInputDirection() const
 	auto left  = static_cast<int>(sf::Keyboard::isKeyPressed(left_key_ ));
 	auto right = static_cast<int>(sf::Keyboard::isKeyPressed(right_key_));
 	auto up    = static_cast<int>(sf::Keyboard::isKeyPressed(up_key_   ));
-	auto down  = static_cast<int>(sf::Keyboard::isKeyPressed(down_key_ ));
-	
+	auto down  = static_cast<int>(sf::Keyboard::isKeyPressed(down_key_ ));		
+
 	sf::Vector2f dir({ static_cast<float>(right - left), static_cast<float>(down - up) });
 	if (dir.x == 0 && dir.y == 0)
 	{
