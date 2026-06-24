@@ -7,24 +7,24 @@
 #include "EntityStore.h"
 #include "Entity.h"
 
-class EntityManager : public EntityStore
+class EntityManager
 {
 public:
-	Id AddEntity(Entity&& entity);
-	void RemoveEntity(Id id);
-	void EnableEntity(Id id);
-	void DisableEntity(Id id);
+	virtual Id AddEntity(Entity&& entity) = 0;
+	virtual void RemoveEntity(Id id)  = 0;
+	virtual void EnableEntity(Id id)  = 0;
+	virtual void DisableEntity(Id id) = 0;
 
-	std::vector<Id> GetIdsByTag(const std::string& tag);
-	void AddTagForId(const std::string& tag, Id id);
+	virtual std::vector<Id> GetIdsByTag(const std::string& tag) = 0;
+	virtual void AddTagForId(const std::string& tag, Id id) = 0;
 
-	Entity* GetEntityById(Id id);
+	virtual Entity* GetEntityById(Id id) = 0;
 
-private:
+protected:
 	Id current_id_ = 0;
 
 	std::unordered_map<std::string, std::vector<Id>> ids_;
 
-	Entity* GetEntityById(Id id, std::unordered_map<Id, Entity>& map);
+	virtual Entity* GetEntityById(Id id, std::unordered_map<Id, Entity>& map) = 0;
 };
 

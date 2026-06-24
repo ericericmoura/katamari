@@ -1,1 +1,1 @@
-#include "GraphicsComponent.h"
+// THIS IS AN INTERFACE

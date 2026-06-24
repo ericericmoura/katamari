@@ -14,6 +14,7 @@
 #include "BitmapStore.h"
 #include "EntityStore.h"
 #include "ShapeGraphicsComponent.h"
+#include "EntityManager.h"
 
 struct WindowConfiguration
 {
@@ -23,8 +24,8 @@ struct WindowConfiguration
 
 int main()
 {
-	BitmapStore bitmap_store{};
-	EntityStore entity_store{};
+	BitmapStore   bitmap_store{};
+	EntityManager entity_manager{};
 
 	Entity player{ 
 		bitmap_store.GetTexture("./graphics/scales.jpg"), 
